@@ -9,7 +9,7 @@
     tools:context=".MainScreen">
 
     <RelativeLayout
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
@@ -20,15 +20,17 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="30dp"
-            android:textColor="@color/mainColorBurgund"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="32dp"
             android:background="@drawable/edit_text_style"
             android:inputType="textPersonName"
-            android:text="Szukaj..." />
+            android:paddingLeft="10dp"
+            android:paddingTop="8dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="8dp"
+            android:text="Szukaj..."
+            android:textColor="@color/mainColorGray"
+            android:textSize="20dp" />
     </RelativeLayout>
 
     <GridLayout
@@ -38,7 +40,8 @@
         android:layout_weight="8"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="15dp">
+        android:padding="15dp"
+        android:layout_marginBottom="50dp">
 
         <!--row0 col0 -->
 
@@ -63,7 +66,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_margin="20dp"
+                android:layout_margin="26dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_person_burgund_24dp" />
@@ -92,7 +95,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_margin="20dp"
+                android:layout_margin="26dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_map_black_24dp" />
@@ -121,7 +124,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_margin="20dp"
+                android:layout_margin="27dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_class_black_24dp" />
@@ -149,7 +152,7 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_margin="20dp"
+                android:layout_margin="26dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_place_black_24dp" />
