@@ -1,7 +1,4 @@
 package com.example.canis.WorkersInformationModule
 
-class WorkersMainActivity {
-
-
-
+class WorkersAdapter {
 }
