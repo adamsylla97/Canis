@@ -1,7 +1,11 @@
 package com.example.canis.WorkersInformationModule.communication
 
+import retrofit2.http.GET
+import retrofit2.http.Path
+
 interface WorkersInformationService {
 
-    //TODO add methods for getting data from REST API
+    @GET("/api/workers/{id}")
+    suspend fun workerInformation(@Path("id") id:Int) : Worker
 
 }
