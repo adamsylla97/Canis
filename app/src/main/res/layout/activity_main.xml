@@ -65,9 +65,10 @@
                 android:layout_height="wrap_content"/>
 
             <ImageView
-                android:layout_margin="26dp"
+                android:id="@+id/workersButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="26dp"
                 android:src="@drawable/ic_person_burgund_24dp" />
 
         </androidx.cardview.widget.CardView>
