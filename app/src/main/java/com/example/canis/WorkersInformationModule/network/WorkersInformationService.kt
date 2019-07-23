@@ -1,4 +1,4 @@
-package com.example.canis.WorkersInformationModule.communication
+package com.example.canis.WorkersInformationModule.network
 
 import retrofit2.http.GET
 import retrofit2.http.Path

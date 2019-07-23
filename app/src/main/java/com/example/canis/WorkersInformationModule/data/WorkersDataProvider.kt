@@ -1,6 +1,6 @@
 package com.example.canis.WorkersInformationModule.data
 
-import com.example.canis.WorkersInformationModule.communication.Worker
+import com.example.canis.WorkersInformationModule.network.Worker
 
 interface WorkersDataProvider {
 

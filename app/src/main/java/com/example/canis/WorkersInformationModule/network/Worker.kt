@@ -1,4 +1,4 @@
-package com.example.canis.WorkersInformationModule.communication
+package com.example.canis.WorkersInformationModule.network
 
 data class Worker(val name: String,
                   val surname: String,

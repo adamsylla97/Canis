@@ -16,7 +16,6 @@ object RestServiceBuilder{
             .client(httpClient)
             .build()
 
-    //prepare for later usage of koin
     fun <T> build(service: Class<T>): T {
         return retrofit.create(service)
     }
