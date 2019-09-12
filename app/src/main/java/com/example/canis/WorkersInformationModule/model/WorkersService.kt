@@ -1,6 +1,6 @@
 package com.example.canis.WorkersInformationModule.model
 
-import com.example.canis.WorkersInformationModule.communication.Worker
+import com.example.canis.WorkersInformationModule.network.Worker
 import com.example.canis.WorkersInformationModule.data.WorkersDataProvider
 
 class WorkersService(private val dataProvider: WorkersDataProvider) {

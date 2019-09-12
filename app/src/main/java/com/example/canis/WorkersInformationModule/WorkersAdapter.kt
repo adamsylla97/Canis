@@ -1,12 +1,13 @@
 package com.example.canis.WorkersInformationModule
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.canis.R
-import com.example.canis.WorkersInformationModule.communication.Worker
+import com.example.canis.WorkersInformationModule.network.Worker
 import kotlinx.android.synthetic.main.worker_item.view.*
 
 class WorkersAdapter(val workersList: List<Worker>, private val listener: (Long) -> Unit): RecyclerView.Adapter<WorkersAdapter.WorkersHolder>() {
@@ -24,11 +25,13 @@ class WorkersAdapter(val workersList: List<Worker>, private val listener: (Long)
         holder.bind(item)
     }
 
-    class WorkersHolder(private val view: View, private val itemClick: (Long)->Unit):RecyclerView.ViewHolder(view){
-
+    class WorkersHolder(private val view: View, private val itemClick: (Long) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(worker: Worker){
             view.workerName.text = worker.name //TODO add worker for buissness part for process first and last name + inz / mgr / d / prof etc.
-            Glide.with(view).load(worker.photo).into(view.workerImage)
+            Glide.with(view).load(R.drawable.ic_person_black_24dp).into(view.workerImage)
+            view.setOnClickListener {
+                itemClick(itemId)
+            }
         }
 
     }

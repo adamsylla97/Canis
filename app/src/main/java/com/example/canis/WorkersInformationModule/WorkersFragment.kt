@@ -11,37 +11,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.canis.R
 import com.example.canis.WorkersInformationModule.communication.Worker
+import kotlinx.android.synthetic.main.worker_module_layout.*
 import java.lang.RuntimeException
 
 class WorkersFragment : Fragment() {
 
     private val onWorkerClickedListener: (Long) -> Unit = {id -> listener?.onWorkerClicked(id)}
     private var listener: OnWorkerClickedListener? = null
-    private val workersList: List<Worker>? = listOf(Worker("a","b","c","d","e","d"),
-                                                    Worker("b","b","c","d","e","d"),
-                                                    Worker("c","b","c","d","e","d"),
-                                                    Worker("a","b","c","d","e","d"),
-                                                    Worker("b","b","c","d","e","d"),
-                                                    Worker("c","b","c","d","e","d"),
-                                                    Worker("a","b","c","d","e","d"),
-                                                    Worker("b","b","c","d","e","d"),
-                                                    Worker("c","b","c","d","e","d")
-    )
+    private val workersList: List<Worker>? = listOf(Worker("a","b","c","d","e","d"),Worker("1","2","3","4","5","6"))
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.i("ABCDE","WE ARE IN WORKERS FRAGMENT")
+
         return inflater.inflate(R.layout.worker_module_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.workersRecycleView)
-        val recyclerAdapter = WorkersAdapter(workersList!!,onWorkerClickedListener)
-        recyclerView.apply{
-            layoutManager = LinearLayoutManager(context)
-            adapter = recyclerAdapter
-        }
+
+
+        workersRecycleView.layoutManager = LinearLayoutManager(context)
+        val adapter = WorkersAdapter(workersList!!,onWorkerClickedListener)
+        workersRecycleView.adapter = adapter
+
     }
 
     override fun onAttach(context: Context?) {
