@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.canis.R
 
-class WorkersActivity : AppCompatActivity(), WorkersFragment.OnWorkerClickedListener {
+class WorkersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,14 +18,5 @@ class WorkersActivity : AppCompatActivity(), WorkersFragment.OnWorkerClickedList
             val fragment = WorkersFragment.newInstance()
             supportFragmentManager.beginTransaction().add(R.id.activity_workers, fragment).commit()
         }
-    }
-
-    override fun onWorkerClicked(id: Long) {
-        val fragment: Fragment = WorkerDetailsItemFragment.newInstance(id)
-        supportFragmentManager
-                .beginTransaction()
-                .addToBackStack("worker_detail")
-                .replace(R.id.workerDetails,fragment)
-                .commit()
     }
 }
