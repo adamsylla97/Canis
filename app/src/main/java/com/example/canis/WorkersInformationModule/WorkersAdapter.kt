@@ -25,10 +25,12 @@ class WorkersAdapter(val workersList: List<Worker>, private val listener: (Long)
     }
 
     class WorkersHolder(private val view: View, private val itemClick: (Long)->Unit):RecyclerView.ViewHolder(view){
+
         fun bind(worker: Worker){
             view.workerName.text = worker.name //TODO add worker for buissness part for process first and last name + inz / mgr / d / prof etc.
             Glide.with(view).load(worker.photo).into(view.workerImage)
         }
+
     }
 
 }

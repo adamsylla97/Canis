@@ -1,5 +1,6 @@
 package com.example.canis.WorkersInformationModule
 
+import com.example.canis.RestServiceBuilder
 import com.example.canis.WorkersInformationModule.communication.WorkersInformationService
 import com.example.canis.WorkersInformationModule.communication.WorkersListService
 import com.example.canis.WorkersInformationModule.data.RestWorkerProvider

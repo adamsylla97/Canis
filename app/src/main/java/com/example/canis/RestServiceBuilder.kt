@@ -1,4 +1,4 @@
-package com.example.canis.WorkersInformationModule
+package com.example.canis
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
