@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".NavigationModule.NavigationActivity"/>
+        <activity android:name=".NavigationModule.MapboxActivity"/>
     </application>
 
 </manifest>

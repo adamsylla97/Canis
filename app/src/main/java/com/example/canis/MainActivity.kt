@@ -3,7 +3,7 @@ package com.example.canis
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.canis.NavigationModule.NavigationActivity
+import com.example.canis.NavigationModule.MapboxActivity
 import com.example.canis.WorkersInformationModule.WorkersActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         navigationButton.setOnClickListener{
-            startActivity(Intent(this, NavigationActivity::class.java))
+            startActivity(Intent(this, MapboxActivity::class.java))
         }
 
     }
