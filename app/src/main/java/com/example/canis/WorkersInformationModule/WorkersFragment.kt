@@ -2,24 +2,21 @@ package com.example.canis.WorkersInformationModule
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.canis.R
-import com.example.canis.WorkersInformationModule.network.Worker
+import com.example.canis.WorkersInformationModule.model.Worker
 import kotlinx.android.synthetic.main.worker_module_layout.*
-import java.lang.RuntimeException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class WorkersFragment : Fragment() {
 
-    //private val onWorkerClickedListener: (Long) -> Unit = {id -> listener?.onWorkerClicked(id)}
-    //private var listener: OnWorkerClickedListener? = null
-    private val workersList: List<Worker>? = listOf(Worker("a","b","c","d","e","d","3"),Worker("1","2","3","4",
-            "5","6","7"))
+    private val service = InstanceProvider.getWorkerServiceInstance()
 
     val adapter = WorkersAdapter{onItemClicked(it)}
 
@@ -32,10 +29,14 @@ class WorkersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        GlobalScope.launch(Dispatchers.Main) {
+            val workers = service.fetchWorkers()
 
-        workersRecycleView.layoutManager = LinearLayoutManager(context)
-        adapter.addList(workersList!!)
-        workersRecycleView.adapter = adapter
+            workersRecycleView.layoutManager = LinearLayoutManager(context)
+            adapter.addList(workers)
+            workersRecycleView.adapter = adapter
+        }
+
 
     }
 

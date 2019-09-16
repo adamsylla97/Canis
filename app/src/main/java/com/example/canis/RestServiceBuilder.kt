@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RestServiceBuilder{
 
-    private val url = "" //TODO ADD BASIC URL
+    private val url = "http://canis.spajstech.ovh"
 
     private val httpClient = OkHttpClient.Builder().build()
 

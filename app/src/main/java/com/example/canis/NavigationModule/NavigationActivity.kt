@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.canis.R
 import com.mapbox.android.core.location.LocationEngine
@@ -57,7 +57,6 @@ class NavigationActivity : AppCompatActivity(), PermissionsListener, LocationEng
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         Mapbox.getInstance(applicationContext, getString(R.string.access_token))
         setContentView(R.layout.activity_navigation)
         mapView = findViewById(R.id.mapView)
@@ -80,6 +79,28 @@ class NavigationActivity : AppCompatActivity(), PermissionsListener, LocationEng
 
             NavigationLauncher.startNavigation(this, navigationLauncherOptions) //4
         }
+
+        setupSpinner()
+    }
+
+    private fun setupSpinner(){
+        val spinnerPlaces = findViewById<Spinner>(R.id.spinnerPlaces)
+
+        val placesAdapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                (1..5).map{it}
+        )
+
+        spinnerPlaces.adapter = placesAdapter
+        spinnerPlaces.onItemSelectedListener = createPlacesListener()
+    }
+
+    private fun createPlacesListener() = object:  AdapterView.OnItemSelectedListener{
+        override fun onItemSelected(adapterView: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+
+        }
+        override fun onNothingSelected(p0: AdapterView<*>?) {}
     }
 
     fun enableLocation(){

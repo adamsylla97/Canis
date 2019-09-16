@@ -10,12 +10,18 @@ import org.koin.dsl.module
 
 object InstanceProvider {
 
-    val commonModule = module {
+    fun getWorkerServiceInstance(): WorkersService {
 
-        single { RestServiceBuilder.build(WorkersInformationService::class.java) }
-        single { RestServiceBuilder.build(WorkersListService::class.java)}
-        single<WorkersDataProvider> {RestWorkerProvider(get(), get())}
-        single { WorkersService(get())}
+        val rest1 = RestServiceBuilder.build(WorkersListService::class.java)
+        val rest2 = RestServiceBuilder.build(WorkersInformationService::class.java)
+
+        val dataProvider = RestWorkerProvider(rest1,rest2)
+
+        val service = WorkersService(dataProvider)
+
+        return service
 
     }
+
+
 }
