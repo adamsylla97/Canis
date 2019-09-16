@@ -37,7 +37,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NavigationActivity : AppCompatActivity(), PermissionsListener, LocationEngineListener, MapboxMap.OnMapClickListener {
+class MapboxActivity : AppCompatActivity(), PermissionsListener, LocationEngineListener, MapboxMap.OnMapClickListener {
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
     private lateinit var permissionManager: PermissionsManager
@@ -57,8 +57,9 @@ class NavigationActivity : AppCompatActivity(), PermissionsListener, LocationEng
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Mapbox.getInstance(applicationContext, getString(R.string.access_token))
-        setContentView(R.layout.activity_navigation)
+
+        Mapbox.getInstance(this, getString(R.string.access_token))
+        setContentView(R.layout.activity_mapbox)
         mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
 
