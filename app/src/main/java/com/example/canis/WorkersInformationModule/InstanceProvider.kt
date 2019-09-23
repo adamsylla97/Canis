@@ -2,20 +2,24 @@ package com.example.canis.WorkersInformationModule
 
 import com.example.canis.RestServiceBuilder
 import com.example.canis.WorkersInformationModule.data.RestWorkerProvider
-import com.example.canis.WorkersInformationModule.data.WorkersDataProvider
-import com.example.canis.WorkersInformationModule.model.WorkersService
 import com.example.canis.WorkersInformationModule.network.WorkersInformationService
 import com.example.canis.WorkersInformationModule.network.WorkersListService
-import org.koin.dsl.module
+import com.example.canis.WorkersInformationModule.model.WorkersService
+
 
 object InstanceProvider {
 
-    val commonModule = module {
+    fun getWorkerServiceInstance(): WorkersService {
 
-        single { RestServiceBuilder.build(WorkersInformationService::class.java) }
-        single { RestServiceBuilder.build(WorkersListService::class.java)}
-        single<WorkersDataProvider> {RestWorkerProvider(get(), get())}
-        single { WorkersService(get())}
+        val rest1 = RestServiceBuilder.build(WorkersListService::class.java)
+        val rest2 = RestServiceBuilder.build(WorkersInformationService::class.java)
+
+        val dataProvider = RestWorkerProvider(rest1,rest2)
+
+        val service = WorkersService(dataProvider)
+
+        return service
 
     }
+
 }
