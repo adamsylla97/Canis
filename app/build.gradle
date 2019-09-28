@@ -73,6 +73,9 @@ dependencies {
     }
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
+    //Beacon
+    implementation 'com.kontaktio:sdk:4.0.3'
+
 }
 repositories {
     mavenCentral()
