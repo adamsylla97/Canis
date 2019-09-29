@@ -13,4 +13,6 @@
     <!--navigation-->
     <string name="access_token">pk.eyJ1IjoiYWRhbXNraTEyNiIsImEiOiJjanV3anBvNHAwZDVjM3lwYmUxZGRtd3I2In0.oKFfz8R4hH5zT21IU3pKoA</string>
     <string name="start_navigating">Start navigating</string>
+    <string name="was_in_tunnel" translatable="false">was_in_tunnel</string>
+    <string name="was_navigation_stopped" translatable="false">was_navigation_stopped</string>
 </resources>

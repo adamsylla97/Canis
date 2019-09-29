@@ -1,4 +1,4 @@
-package com.example.canis.NavigationModule
+package com.example.canis.NavigationWorkersModule
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,13 +7,9 @@ import android.os.Bundle
 import android.os.CancellationSignal
 import android.util.Log
 import android.view.ActionMode
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.canis.R
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineListener
@@ -43,24 +39,14 @@ import com.mapbox.services.android.navigation.ui.v5.listeners.NavigationListener
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
 import com.mapbox.services.android.navigation.v5.routeprogress.ProgressChangeListener
-import kotlinx.android.synthetic.main.activity_mapbox.*
-import kotlinx.android.synthetic.main.worker_module_layout.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.function.Consumer
 
-class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngineListener, MapboxMap.OnMapClickListener, NavigationListener {
-    override fun onNavigationRunning() {
-        Log.i("supertest","i am running")
-    }
-
-    override fun onCancelNavigation() {
-        Log.i("supertest","navigation canceled")
+class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngineListener, MapboxMap.OnMapClickListener {
+    override fun onMapClick(point: LatLng) {
+        Log.i("map clicked",":)")
     }
 
     private lateinit var mapView: MapView
@@ -89,7 +75,7 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
 
 
         Mapbox.getInstance(this, getString(R.string.access_token))
-        setContentView(R.layout.activity_mapbox)
+        setContentView(R.layout.activity_mapbox_workers)
 
         isWorker = intent.extras?.getBoolean("isWorker",false) ?: false
         if(isWorker){
@@ -108,52 +94,14 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
             enableLocation()
         }
 
-       // lat = intent.extras?.getDouble("latWorkier")!!
-       // lon = intent.extras?.getDouble("lonWorker")!!
-
-        setupPlacesSpinner()
-
         startButton.setOnClickListener {
             val navigationLauncherOptions = NavigationLauncherOptions.builder() //1
                     .directionsProfile(DirectionsCriteria.PROFILE_WALKING)
                     .directionsRoute(currentRoute) //2
-                    .shouldSimulateRoute(false) //3
+                    .shouldSimulateRoute(true) //3
                     .build()
 
             NavigationLauncher.startNavigation(this,navigationLauncherOptions) //4
-        }
-
-    }
-
-    private fun setupPlacesSpinner(){
-
-        val service = NavigationInstanceProvider.getNavPlacesServiceInstance()
-
-        val places = mutableListOf<NavPlace>()
-
-        GlobalScope.launch(Dispatchers.Main) {
-            places.addAll(service.fetchPlaces())
-        }
-
-        val spinnerAdater = ArrayAdapter(
-                baseContext,
-                android.R.layout.simple_spinner_item,
-                places
-        )
-
-        spinnerAdater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        placesSpinner.adapter = spinnerAdater
-
-        spinnerAdater.notifyDataSetChanged()
-
-        placesSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent:AdapterView<*>, view: View, position: Int, id: Long){
-                Log.i("supertest","item selected")
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>){
-                Log.i("supertest","item selected")
-            }
         }
 
     }
@@ -169,13 +117,6 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
             permissionManager.requestLocationPermissions(this)
         }
     }
-
-    override fun onActionModeFinished(mode: ActionMode?) {
-        super.onActionModeFinished(mode)
-        Log.i("supertest","asdasd")
-    }
-
-
 
     //gives user location
     @SuppressWarnings("MissingPermission")
@@ -205,36 +146,28 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 13.0))
     }
 
-    override fun onMapClick(point: LatLng) {
+    fun setupMap() {
 
-        if(!map.markers.isEmpty()){
-            map.clear()
-        }
-
-        destinationMarker = map.addMarker(MarkerOptions().position(point))
-        destinationPosition = Point.fromLngLat(point.longitude, point.latitude)
         originPosition = Point.fromLngLat(originLocation.longitude, originLocation.latitude)
         val startPoint = Point.fromLngLat(originLocation.longitude, originLocation.latitude)
         val endPoint: Point?
         if(isWorker){
+
+            Log.i("supertest",lonWorker.toString() + " " + latWorker.toString())
+
             endPoint = Point.fromLngLat(lonWorker,latWorker)
         } else {
             endPoint = Point.fromLngLat(destinationPosition.longitude(), destinationPosition.latitude())
         }
         startButton.isEnabled = true
         startButton.setBackgroundResource(R.color.mapboxBlue)
-        getRoute(endPoint,startPoint)
-        Toast.makeText(this,"Map on click",Toast.LENGTH_LONG).show()
+        getRoute(startPoint,endPoint)
     }
 
 
     //when user declines permission
     override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
         Toast.makeText(this,"Please give me permission.",Toast.LENGTH_LONG).show()
-    }
-
-    override fun onNavigationFinished() {
-        Log.i("supertest","i am super hero!!")
     }
 
     override fun onPermissionResult(granted: Boolean) {
@@ -250,6 +183,8 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
     override fun onLocationChanged(location: Location?) {
         location?.let {
             originLocation = location
+            setCameraPosition(location)
+            setupMap()
             setCameraPosition(location)
         }
     }

@@ -35,7 +35,7 @@ class WorkersAdapter(private val listener: (Worker) -> Unit): RecyclerView.Adapt
         fun bind(worker: Worker){
             Log.i("myworker",worker.toString())
             view.workerName.text = worker.firstName + " " + worker.lastName
-            Glide.with(view).load(worker.photo).placeholder(R.drawable.photo_placeholder).into(view.workerImage)
+            Glide.with(view).load(worker.image).placeholder(R.drawable.photo_placeholder).into(view.workerImage)
             view.setOnClickListener {
                 itemClick(worker)
             }
