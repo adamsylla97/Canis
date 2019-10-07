@@ -1,4 +1,4 @@
-package com.example.canis;
+package com.example.canis.BeaconModule;
 
 import android.app.Service;
 import android.content.Intent;
@@ -19,23 +19,21 @@ import com.kontakt.sdk.android.common.profile.IBeaconRegion;
 
 import java.util.List;
 
-import static com.google.android.gms.common.ConnectionResult.TIMEOUT;
-
 public class BeaconService extends Service {
-
-    public static String nearestBeaconId;
 
     private static final String API_KEY = "TTMLKMtxDZnZTDymSmRdSgKOjFqBQmRB";
 
     private final Handler handler = new Handler();
     private ProximityManager proximityManager;
-    private boolean isRunning; // Flag indicating if service is already running.
+    private boolean isRunning;
+    private BeaconInfo beaconInfo;
 
     @Override
     public void onCreate() {
         super.onCreate();
         KontaktSDK.initialize(API_KEY);
         setupProximityManager();
+        beaconInfo = BeaconInfo.getInstance();
         isRunning = false;
     }
 
@@ -73,22 +71,12 @@ public class BeaconService extends Service {
         });
     }
 
-    private void stopAfterDelay() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                proximityManager.disconnect();
-                stopSelf();
-            }
-        }, TIMEOUT);
-    }
-
     private IBeaconListener createIBeaconListener() {
         return new SimpleIBeaconListener() {
             @Override
             public void onIBeaconsUpdated(List<IBeaconDevice> iBeacons, IBeaconRegion region) {
                 if (iBeacons.isEmpty()) {
-                    nearestBeaconId = null;
+                    beaconInfo.setNearestBeaconId("");
                     return;
                 }
                 IBeaconDevice iBeacon = iBeacons.get(0);
@@ -97,10 +85,11 @@ public class BeaconService extends Service {
                         iBeacon = b;
                     }
                 }
-                if(!nearestBeaconId.equals(iBeacon.getUniqueId())) {
-                    nearestBeaconId = iBeacon.getUniqueId();
+                if (!beaconInfo.getNearestBeaconId().equals(iBeacon.getUniqueId())) {
+                    beaconInfo.setNearestBeaconId(iBeacon.getUniqueId());
                 }
-                Toast.makeText(BeaconService.this, nearestBeaconId, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(BeaconService.this, beaconInfo.getNearestBeaconId(), Toast.LENGTH_SHORT).show();
             }
         };
     }

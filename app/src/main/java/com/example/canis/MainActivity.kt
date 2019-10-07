@@ -11,9 +11,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var beaconService: Intent? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        beaconService = Intent(applicationContext, BeaconService::class.java)
+
+        startService(beaconService)
 
         workersButton.setOnClickListener {
             startActivity(Intent(this, WorkersActivity::class.java))
@@ -30,4 +36,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onDestroy() {
+        stopService(beaconService);
+        super.onDestroy()
+    }
 }
