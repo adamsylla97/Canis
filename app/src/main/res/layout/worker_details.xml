@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/workerDetails"
-    android:background="@color/cardview_light_background"
+    android:background="@color/mainColorGray"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     >
 
     <ImageView
@@ -19,6 +21,8 @@
         android:id="@+id/navigationWorkerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/mainColorBurgund"
+        android:textColor="@color/mainColorGray"
         android:text="Prowadź" />
 
     <ScrollView

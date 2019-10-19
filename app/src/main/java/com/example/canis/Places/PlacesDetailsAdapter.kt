@@ -1,25 +1,25 @@
-package com.example.canis.Places.Information
+package com.example.canis.Places
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.canis.Places.Information.model.Place
+import com.example.canis.NavigationModule.NavPlace
+import com.example.canis.Places.Information.model.Navplace
 import com.example.canis.R
 import kotlinx.android.synthetic.main.place_details_item.view.*
 import kotlinx.android.synthetic.main.place_item.view.*
 
-class PlacesAdapter(private val listener: (Place) -> Unit): RecyclerView.Adapter<PlacesAdapter.PlacesHolder>() {
+class PlacesDetailsAdapter(private val listener: (Navplace) -> Unit): RecyclerView.Adapter<PlacesDetailsAdapter.PlacesHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlacesHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.place_item, parent, false)
+        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.place_details_item, parent, false)
         return PlacesHolder(inflatedView, listener)
     }
 
-    val placesList = mutableListOf<Place>()
+    val placesList = mutableListOf<Navplace>()
 
-    fun addList(listToAdd: List<Place>){
+    fun addList(listToAdd: List<Navplace>){
         placesList.addAll(listToAdd)
     }
 
@@ -32,10 +32,9 @@ class PlacesAdapter(private val listener: (Place) -> Unit): RecyclerView.Adapter
         holder.bind(item)
     }
 
-    class PlacesHolder(private val view: View, private val itemClick: (Place) -> Unit):RecyclerView.ViewHolder(view){
-        fun bind(place: Place){
-            view.placeName.text = place.name
-            Glide.with(view).load(place.photo).placeholder(R.drawable.photo_placeholder).into(view.placeImage)
+    class PlacesHolder(private val view: View, private val itemClick: (Navplace) -> Unit):RecyclerView.ViewHolder(view){
+        fun bind(place: Navplace){
+            view.placeDetailsName.text = place.name
             view.setOnClickListener {
                 itemClick(place)
             }
