@@ -21,7 +21,7 @@ public final class BeaconInfo extends Observable {
         notifyObservers(beaconId);
     }
 
-    String getNearestBeaconId() {
+    public String getNearestBeaconId() {
         return beaconId;
     }
 }

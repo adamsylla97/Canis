@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/searcheRoom"
+        android:id="@+id/searchRoom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
@@ -22,7 +22,6 @@
         android:paddingTop="8dp"
         android:paddingRight="10dp"
         android:paddingBottom="8dp"
-        android:text="Szukaj..."
         android:textColor="@color/mainColorGray"
         android:textSize="20sp" />
 

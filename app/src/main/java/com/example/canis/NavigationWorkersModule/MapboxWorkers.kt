@@ -49,6 +49,10 @@ class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngine
         Log.i("map clicked",":)")
     }
 
+    companion object {
+        var active = false
+    }
+
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
     private lateinit var permissionManager: PermissionsManager
@@ -242,6 +246,7 @@ class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngine
     @SuppressWarnings("MissingPermission")
     override fun onStart() {
         super.onStart()
+        active = true
         if(PermissionsManager.areLocationPermissionsGranted(this)){
             locationEngine?.requestLocationUpdates()
             locationLayerPlugin?.onStart()
@@ -261,6 +266,7 @@ class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngine
 
     override fun onStop() {
         super.onStop()
+        active = false
         locationEngine?.removeLocationUpdates()
         locationLayerPlugin?.onStop()
         mapView.onStop()

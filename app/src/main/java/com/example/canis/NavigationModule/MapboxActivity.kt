@@ -63,6 +63,10 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
         Log.i("supertest","navigation canceled")
     }
 
+    companion object {
+        var active = false
+    }
+
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
     private lateinit var permissionManager: PermissionsManager
@@ -124,6 +128,8 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
         }
 
     }
+
+
 
     private fun setupPlacesSpinner(){
 
@@ -307,6 +313,7 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
     @SuppressWarnings("MissingPermission")
     override fun onStart() {
         super.onStart()
+        active = true
         if(PermissionsManager.areLocationPermissionsGranted(this)){
             locationEngine?.requestLocationUpdates()
             locationLayerPlugin?.onStart()
@@ -326,6 +333,7 @@ class MapboxActivity() : AppCompatActivity(), PermissionsListener, LocationEngin
 
     override fun onStop() {
         super.onStop()
+        active = false
         locationEngine?.removeLocationUpdates()
         locationLayerPlugin?.onStop()
         mapView.onStop()

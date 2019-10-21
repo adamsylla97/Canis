@@ -2,7 +2,12 @@ package com.example.canis.BeaconModule.BeaconNavigationModule;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,19 +32,43 @@ public class BeaconNavigationActivity extends AppCompatActivity implements Obser
 
     private BeaconInfo beaconInfo;
 
+    private EditText inputRoom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beacon_navigation);
         imageView = (ImageView) findViewById(R.id.buildingMap);
+        inputRoom = (EditText) findViewById(R.id.searchRoom);
+        reloadMapAfterPressOkButton();
         beaconNavigationService = InstanceProvider.getBuildingMapService();
         beaconInfo = BeaconInfo.getInstance();
         beaconInfo.addObserver(this);
     }
 
+    private void reloadMapAfterPressOkButton() {
+        inputRoom.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (i == EditorInfo.IME_ACTION_DONE) {
+                updateMap(BeaconInfo.getInstance().getNearestBeaconId());
+            }
+            return false;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateMap(BeaconInfo.getInstance().getNearestBeaconId());
+
+    }
+
     @Override
     public void update(Observable observable, Object o) {
-        beaconNavigationService.findRoute((String) o, "E110").enqueue(new Callback<Navigator>() {
+        updateMap((String) o);
+    }
+
+    private void updateMap(String o) {
+        beaconNavigationService.findRoute(o, inputRoom.getText().toString()).enqueue(new Callback<Navigator>() {
             @Override
             public void onResponse(Call<Navigator> call, Response<Navigator> response) {
                 GlideToVectorYou

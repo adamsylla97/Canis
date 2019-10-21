@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import com.example.canis.BeaconModule.BeaconNavigationModule.BeaconNavigationActivity;
+import com.example.canis.NavigationModule.MapboxActivity;
+import com.example.canis.NavigationWorkersModule.MapboxWorkers;
 import com.kontakt.sdk.android.ble.configuration.ScanMode;
 import com.kontakt.sdk.android.ble.configuration.ScanPeriod;
 import com.kontakt.sdk.android.ble.connection.OnServiceReadyListener;
@@ -87,11 +90,18 @@ public class BeaconService extends Service {
                 }
                 if (!beaconInfo.getNearestBeaconId().equals(iBeacon.getUniqueId())) {
                     beaconInfo.setNearestBeaconId(iBeacon.getUniqueId());
+                    startActivityIfMapInRunning();
                 }
 
                 Toast.makeText(BeaconService.this, beaconInfo.getNearestBeaconId(), Toast.LENGTH_SHORT).show();
             }
         };
+    }
+
+    private void startActivityIfMapInRunning() {
+        if(MapboxActivity.Companion.getActive() || MapboxWorkers.Companion.getActive()) {
+            startActivity(new Intent(BeaconService.this, BeaconNavigationActivity.class));
+        }
     }
 
     @Override
