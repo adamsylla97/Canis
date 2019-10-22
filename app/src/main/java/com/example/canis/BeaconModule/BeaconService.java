@@ -90,6 +90,7 @@ public class BeaconService extends Service {
                 }
                 if (!beaconInfo.getNearestBeaconId().equals(iBeacon.getUniqueId())) {
                     beaconInfo.setNearestBeaconId(iBeacon.getUniqueId());
+                    if(Repeater.getBeacons().contains(iBeacon.getUniqueId()))
                     startActivityIfMapInRunning();
                 }
 

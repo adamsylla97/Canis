@@ -2,18 +2,16 @@ package com.example.canis.BeaconModule.BeaconNavigationModule;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.canis.BeaconModule.BeaconInfo;
 import com.example.canis.BeaconModule.BeaconNavigationModule.model.Navigator;
 import com.example.canis.BeaconModule.BeaconNavigationModule.service.BeaconNavigationService;
+import com.example.canis.BeaconModule.Repeater;
 import com.example.canis.R;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 
@@ -40,6 +38,7 @@ public class BeaconNavigationActivity extends AppCompatActivity implements Obser
         setContentView(R.layout.activity_beacon_navigation);
         imageView = (ImageView) findViewById(R.id.buildingMap);
         inputRoom = (EditText) findViewById(R.id.searchRoom);
+        inputRoom.setText(Repeater.getRoom());
         reloadMapAfterPressOkButton();
         beaconNavigationService = InstanceProvider.getBuildingMapService();
         beaconInfo = BeaconInfo.getInstance();

@@ -15,6 +15,8 @@ public final class BeaconInfo extends Observable {
 
     private String beaconId = "";
 
+    private BeaconInfo(){}
+
     void setNearestBeaconId(String beaconId) {
         this.beaconId = beaconId;
         setChanged();

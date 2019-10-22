@@ -24,9 +24,19 @@
         </activity>
         <activity android:name=".NavigationModule.MapboxActivity" />
         <activity android:name=".NavigationWorkersModule.MapboxWorkers" />
+        <activity android:name=".BeaconModule.BeaconNavigationModule.BeaconNavigationActivity" />
+
+        <service android:name=".BeaconModule.BeaconService" />
+
+        <service android:name="com.kontakt.sdk.android.ble.service.ProximityService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
 
 </manifest>

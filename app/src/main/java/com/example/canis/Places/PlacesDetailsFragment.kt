@@ -3,7 +3,6 @@ package com.example.canis.Places
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +13,7 @@ import com.example.canis.Places.Information.model.Navplace
 import com.example.canis.Places.Information.model.Place
 
 import com.example.canis.R
-import kotlinx.android.synthetic.main.fragment_places.*
-import kotlinx.android.synthetic.main.fragment_places_details.*
+import com.example.canis.BeaconModule.Repeater
 import kotlinx.android.synthetic.main.fragment_places_details.placesRecyclerView
 
 /**
@@ -42,6 +40,9 @@ class PlacesDetailsFragment(private val place: Place) : Fragment() {
 
     private fun onItemClicked(place: Navplace){
         val navigationIntent = Intent(this.context, MapboxWorkers::class.java)
+
+        Repeater.getBeacons().addAll(place.beacons)
+        Repeater.setRoom(place.room)
 
         val cordsBundle = Bundle()
         cordsBundle.putDouble("latWorker",place.lat)
