@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Repeater {
-    private static List beacons = new ArrayList();
+    private static List<String> beacons = new ArrayList<>();
     private static Object room = "E110";
 
-    public static List getBeacons() {
+    public static List<String> getBeacons() {
         return beacons;
     }
 

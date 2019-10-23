@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.canis.BeaconModule.BeaconInfo;
 import com.example.canis.BeaconModule.BeaconNavigationModule.model.Navigator;
 import com.example.canis.BeaconModule.BeaconNavigationModule.service.BeaconNavigationService;
+import com.example.canis.BeaconModule.InstanceProvider;
 import com.example.canis.BeaconModule.Repeater;
 import com.example.canis.R;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 
+import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -43,6 +45,7 @@ public class BeaconNavigationActivity extends AppCompatActivity implements Obser
         beaconNavigationService = InstanceProvider.getBuildingMapService();
         beaconInfo = BeaconInfo.getInstance();
         beaconInfo.addObserver(this);
+        getSupportActionBar().setTitle("Building navigation");
     }
 
     private void reloadMapAfterPressOkButton() {
@@ -74,7 +77,7 @@ public class BeaconNavigationActivity extends AppCompatActivity implements Obser
                         .init()
                         .with(getApplicationContext())
                         .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
-                        .load(Uri.parse(response.body().getMapUrl()), imageView);
+                        .load(Uri.parse(Objects.requireNonNull(response.body()).getMapUrl()), imageView);
             }
 
             @Override

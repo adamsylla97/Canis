@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.canis.NavigationModule.NavPlace
 import com.example.canis.Places.Information.model.Navplace
 import com.example.canis.R
 import kotlinx.android.synthetic.main.place_details_item.view.*
-import kotlinx.android.synthetic.main.place_item.view.*
 
 class PlacesDetailsAdapter(private val listener: (Navplace) -> Unit): RecyclerView.Adapter<PlacesDetailsAdapter.PlacesHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlacesHolder {

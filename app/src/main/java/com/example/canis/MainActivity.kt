@@ -3,6 +3,7 @@ package com.example.canis
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.canis.BeaconModule.BeaconInformationModule.BeaconInformationActivity
 import com.example.canis.BeaconModule.BeaconNavigationModule.BeaconNavigationActivity
 import com.example.canis.BeaconModule.BeaconService
 import com.example.canis.Places.Information.PlacesActivity
@@ -28,6 +29,10 @@ class MainActivity : AppCompatActivity() {
         navigationButton.setOnClickListener{
             //startActivity(Intent(this, MapboxActivity::class.java))
             startActivity(Intent(this, PlacesActivity::class.java))
+        }
+
+        beaconInformationButton.setOnClickListener{
+            startActivity(Intent(this, BeaconInformationActivity::class.java))
         }
 
         beaconNavigationButton.setOnClickListener{
