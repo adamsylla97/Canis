@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Repeater {
     private static List<String> beacons = new ArrayList<>();
-    private static Object room = "E110";
+    private static Object room = "E6";
 
     public static List<String> getBeacons() {
         return beacons;

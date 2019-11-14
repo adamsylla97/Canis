@@ -5,16 +5,20 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".BeaconModule.BeaconInformationModule.BeaconInformationActivity"></activity>
         <activity android:name=".Places.Information.PlacesActivity" />
         <activity android:name=".WorkersInformationModule.WorkersActivity" />
@@ -33,7 +37,7 @@
         <activity android:name=".BeaconModule.BeaconNavigationModule.BeaconNavigationActivity" />
 
         <service android:name=".BeaconModule.BeaconService" />
-        <service android:name="com.kontakt.sdk.android.ble.service.ProximityService" />
+        <service android:name="com.kontakt.sdk.android.ble.service.ProximityService" android:exported="false"/>
     </application>
 
 </manifest>

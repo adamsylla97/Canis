@@ -62,7 +62,13 @@ public class BeaconNavigationActivity extends AppCompatActivity implements Obser
         super.onResume();
         updateMap(BeaconInfo.getInstance().getNearestBeaconId());
 
+
+
     }
+
+
+
+
 
     @Override
     public void update(Observable observable, Object o) {

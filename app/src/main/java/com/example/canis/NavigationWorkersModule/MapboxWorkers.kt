@@ -72,6 +72,7 @@ class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngine
     //coords for workers
     private var latWorker: Double = 0.0
     private var lonWorker: Double = 0.0
+    private var placeWorker: String = ""
     private var isWorker = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +86,7 @@ class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngine
         if(isWorker){
             lonWorker = intent.extras?.getDouble("lonWorker") ?: 0.0
             latWorker = intent.extras?.getDouble("latWorker") ?: 0.0
+            placeWorker = intent.extras?.getString("workerPlace") ?: ""
         }
 
         mapView = findViewById(R.id.mapView)
@@ -159,8 +161,10 @@ class MapboxWorkers() : AppCompatActivity(), PermissionsListener, LocationEngine
 
             Log.i("supertest",lonWorker.toString() + " " + latWorker.toString())
 
-            endPoint = Point.fromLngLat(lonWorker,latWorker)
-        } else {
+            if(placeWorker.contains("A10"))
+                endPoint = Point.fromLngLat(19.4529520,51.7524802)
+            else
+                endPoint = Point.fromLngLat(lonWorker,latWorker)        } else {
             endPoint = Point.fromLngLat(destinationPosition.longitude(), destinationPosition.latitude())
         }
         startButton.isEnabled = true

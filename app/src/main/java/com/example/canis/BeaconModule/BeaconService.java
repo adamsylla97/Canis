@@ -94,7 +94,6 @@ public class BeaconService extends Service {
                     startActivityIfMapInRunning();
                 }
 
-                Toast.makeText(BeaconService.this, beaconInfo.getNearestBeaconId(), Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -104,6 +103,7 @@ public class BeaconService extends Service {
             startActivity(new Intent(BeaconService.this, BeaconNavigationActivity.class));
         }
     }
+
 
     @Override
     public void onDestroy() {

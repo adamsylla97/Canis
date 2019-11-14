@@ -38,6 +38,7 @@ class WorkerDetailsItemFragment(private val worker: Worker) : Fragment() {
             val cordsBundle = Bundle()
             cordsBundle.putDouble("latWorker",worker.lat)
             cordsBundle.putDouble("lonWorker",worker.lon)
+            cordsBundle.putString("workerPlace", worker.address)
             cordsBundle.putBoolean("isWorker",true)
 
             navigationIntent.putExtras(cordsBundle)
