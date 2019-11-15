@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.canis.BeaconModule.Repeater
 import com.example.canis.NavigationWorkersModule.MapboxWorkers
+import com.example.canis.Places.Information.model.Beacon
 import com.example.canis.Places.Information.model.Navplace
 import com.example.canis.Places.Information.model.Place
 
@@ -42,6 +44,12 @@ class PlacesDetailsFragment(private val place: Place) : Fragment() {
 
     private fun onItemClicked(place: Navplace){
         val navigationIntent = Intent(this.context, MapboxWorkers::class.java)
+
+        for (item: Beacon in place.beacons) {
+            Repeater.getBeacons().add(item.id)
+        }
+
+        Repeater.setRoom(place.room)
 
         val cordsBundle = Bundle()
         cordsBundle.putDouble("latWorker",place.lat)

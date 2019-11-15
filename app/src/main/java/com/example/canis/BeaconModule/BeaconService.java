@@ -93,6 +93,7 @@ public class BeaconService extends Service {
                     if(Repeater.getBeacons().contains(iBeacon.getUniqueId()))
                     startActivityIfMapInRunning();
                 }
+               // Toast.makeText(BeaconService.this, beaconInfo.getNearestBeaconId(), Toast.LENGTH_SHORT).show();
 
             }
         };

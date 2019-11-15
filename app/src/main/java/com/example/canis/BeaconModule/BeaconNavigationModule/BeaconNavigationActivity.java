@@ -83,7 +83,7 @@ public class BeaconNavigationActivity extends AppCompatActivity implements Obser
                         .init()
                         .with(getApplicationContext())
                         .setPlaceHolder(R.mipmap.ic_launcher, R.mipmap.ic_launcher)
-                        .load(Uri.parse(Objects.requireNonNull(response.body()).getMapUrl()), imageView);
+                        .load(Uri.parse(response.body().getMapUrl()), imageView);
             }
 
             @Override
